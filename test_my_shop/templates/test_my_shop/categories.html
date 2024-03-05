@@ -1,0 +1,21 @@
+{% extends 'test_my_shop/base.html' %}
+
+{% block title %} {{title}} {{cat}} {% endblock %}
+
+{% block content %}
+
+    <h1>Категория: {{cat.name}}</h1>
+
+    {% for i in prod %}
+        {% if i.category_id == cat.id %}
+            <li>
+                <a href="{{i.get_url}}">{{i.name}}</a>
+                {% if i.image %}
+                    <p><img src="{{i.image.url}}" alt=""  height="200" width="150"></p>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock %}

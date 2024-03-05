@@ -1,0 +1,25 @@
+{% extends 'test_my_shop/base.html' %}
+
+{% block title %} Все о {{one_prod.name}} {% endblock %}
+
+
+{% block content %}
+
+    <hr>
+    <h2>Продукты</h2>
+    <h4>{{one_prod.name}}</h4>
+    <p>{{one_prod.description}}</p>
+    {% if one_prod.image %}
+        <p><img src="{{one_prod.image.url}}" alt="" height="400" width="300"></p>
+    {% endif %}
+    <hr>
+    <h3>Категория:</h3>
+        <p><a href="{{one_prod.category.get_url_cat}}">{{one_prod.category.name}}</a></p>
+    <hr>
+    <p class="price">${{ product.price }}</p>
+    <form action="{% url 'cart:cart_add' one_prod.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Добавить в корзину">
+    </form>
+{% endblock %}.
